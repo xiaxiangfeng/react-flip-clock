@@ -1,10 +1,11 @@
 import React from 'react'
 import { render } from 'react-dom'
+import Clock from '../src/react-flip-clock.js'
 
 const Index = () => {
   return (
     <div>
-测试
+      <Clock />
     </div>
   )
 }
