@@ -19,8 +19,24 @@ export default class FilpClock extends React.Component {
     }, 1000)
   }
 
+  hoursPredMove = (() => {
+    return this.move('.hours-pre')
+  })()
+
+  hoursLastMove = (() => {
+    return this.move('.hours-last', this.hoursPredMove)
+  })()
+
+  minutesPredMove = (() => {
+    return this.move('.minutes-pre', this.hoursLastMove)
+  })()
+
+  minutesLastMove = (() => {
+    return this.move('.minutes-last', this.minutesPredMove)
+  })()
+
   secondsPredMove = (() => {
-    return this.move('.seconds-pre')
+    return this.move('.seconds-pre', this.minutesLastMove)
   })()
 
   secondsLastMove = (() => {
