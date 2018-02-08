@@ -11,6 +11,12 @@
 }
 
 .flip-clock-wrapper {
+    display: inline-block;
+
+    & > div {
+        display: inline-block;
+    }
+
     & ul {
         position: relative;
         padding: 0px;
@@ -217,6 +223,29 @@
         100% {
           opacity: 0; 
         } 
+    }
+
+    .semicolon {
+        display: inline-block;
+        width: 10px;
+        height: 100%;
+        position: relative;
+        top: 50px;
+        transform: translate(0,-50%);
+        vertical-align: top;
+
+        & > span {
+            display: block;
+            width: 10px;
+            height: 10px;
+            background: #323434;
+            border-radius: 50%;
+            margin-bottom: 10px;
+
+            &:last-child {
+                margin-bottom: 0px;
+            }
+        }
     }
 
 }

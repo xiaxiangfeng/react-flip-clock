@@ -1,61 +1,52 @@
 import React from 'react'
 import Seconds from './seconds'
+import Minutes from './minutes'
+import Hours from './hours'
+import '@/index.scss'
 
 export default class FilpClock extends React.Component {
-  constructor () {
-    super()
-    this.flip = this.flip.bind(this)
-    this.clearFilpClock = this.clearFilpClock.bind(this)
-  }
-
   $$ (str) {
     return document.querySelectorAll(str)
   }
 
   componentDidMount () {
-    this.secondsPre = this.$$('.seconds-pre > li')
-    this.secondsLast = this.$$('.seconds-last > li')
     this.flip()
   }
 
   flip () {
-    let secondsNum = 0
-    const secondsLast = this.secondsLast
-
     setInterval(() => {
-      this.clearFilpClock('.seconds-last')
-      secondsLast[secondsNum].className = 'flip-clock-before'
-
-      if (secondsNum === 9) {
-        secondsLast[0].className = 'flip-clock-active'
-        secondsNum = 0
-        this.secondsPredMove()
-        return
-      }
-
-      secondsLast[secondsNum + 1].className = 'flip-clock-active'
-      secondsNum = secondsNum + 1
+      this.secondsLastMove()
     }, 1000)
   }
 
   secondsPredMove = (() => {
-    let secondsNum = 0
+    return this.move('.seconds-pre')
+  })()
+
+  secondsLastMove = (() => {
+    return this.move('.seconds-last', this.secondsPredMove)
+  })()
+
+  move (className, fn) {
+    let num = 0
+    let ele = null
     return () => {
-      const secondsPre = this.secondsPre
+      const element = ele || (ele = this.$$(`${className} > li`))
 
-      this.clearFilpClock('.seconds-pre')
-      secondsPre[secondsNum].className = 'flip-clock-before'
+      this.clearFilpClock(className)
+      element[num].className = 'flip-clock-before'
 
-      if (secondsNum === 5) {
-        secondsPre[0].className = 'flip-clock-active'
-        secondsNum = 0
+      if (num === element.length - 1) {
+        element[0].className = 'flip-clock-active'
+        num = 0
+        fn && fn()
         return
       }
 
-      secondsPre[secondsNum + 1].className = 'flip-clock-active'
-      secondsNum = secondsNum + 1
+      element[num + 1].className = 'flip-clock-active'
+      num = num + 1
     }
-  })()
+  }
 
   clearFilpClock (str) {
     this.$$(`${str} li`).forEach((item) => {
@@ -66,7 +57,9 @@ export default class FilpClock extends React.Component {
   render () {
     return (
       <div className="flip-clock-wrapper">
-        <Seconds ref="seconds"/>
+        <Hours/>
+        <Minutes/>
+        <Seconds/>
       </div>
     )
   }
