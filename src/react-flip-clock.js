@@ -1,10 +1,10 @@
 import React from 'react'
-import '@/index.scss'
+import Seconds from './seconds'
 
 export default () => {
   return (
-      <div>
-        clock
-      </div>
+    <div className="flip-clock-wrapper">
+      <Seconds />
+    </div>
   )
 }

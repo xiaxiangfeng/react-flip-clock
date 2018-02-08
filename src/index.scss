@@ -1,3 +1,222 @@
-.box {
-    color: red;
+@mixin up-shadow {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0.1)), color-stop(100%, black));
+    background: linear, top, rgba(0, 0, 0, 0.1) 0%, black 100%;
+    background: linear, to bottom, rgba(0, 0, 0, 0.1) 0%, black 100%;
+}
+
+@mixin down-shadow {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, black), color-stop(100%, rgba(0, 0, 0, 0.1)));
+    background: linear, top, black 0%, rgba(0, 0, 0, 0.1) 100%;
+    background: linear, to bottom, black 0%, rgba(0, 0, 0, 0.1) 100%;
+}
+
+.flip-clock-wrapper {
+    & ul {
+        position: relative;
+        padding: 0px;
+        margin: 5px;
+        width: 60px;
+        height: 90px;
+        font-size: 80px;
+        font-weight: bold;
+        line-height: 87px;
+        border-radius: 6px;
+        background: #000;
+        display: inline-block;
+        vertical-align: top;
+        list-style: none; 
+
+        & li {
+            z-index: 1;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            text-decoration: none !important;
+
+            & a {
+                display: block;
+                height: 100%;
+                perspective: 200px;
+                margin: 0 !important;
+                overflow: visible !important;
+                cursor: default !important; 
+
+                & div {
+                    z-index: 1;
+                    position: absolute;
+                    left: 0;
+                    width: 100%;
+                    height: 50%;
+                    font-size: 80px;
+                    overflow: hidden;
+                }
+            }
+
+            &:first-child {
+                z-index: 2; 
+            }
+        }
+    }
+
+    & a {
+        cursor: pointer;
+        text-decoration: none;
+        color: #ccc; 
+    }
+
+    & a:hover {
+        color: #fff;
+    }
+
+    .flip {   
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7); 
+    }
+
+    .shadow {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+    }
+
+    .up {
+        transform-origin: 50% 100%;
+        top: 0; 
+
+        & .inn {
+            top: 0; 
+        }
+
+        &:after {
+            content: "";
+            position: absolute;
+            top: 44px;
+            left: 0;
+            z-index: 5;
+            width: 100%;
+            height: 3px;
+            background-color: #000;
+            background-color: rgba(0, 0, 0, 0.4); 
+        }
+    }
+
+    .down {
+        transform-origin: 50% 0;
+        bottom: 0; 
+
+        & .inn {
+            bottom: 0; 
+        }       
+    }
+
+    .inn {
+        position: absolute;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 200%;
+        color: #ccc;
+        text-shadow: 0 1px 2px #000;
+        text-align: center;
+        background-color: #333;
+        border-radius: 6px;
+        font-size: 70px; 
+    }
+
+    .flip-clock-active {
+        animation: asd 0.5s 0.5s linear both;
+        z-index: 5;
+
+        & .down {
+            z-index: 2;
+            animation: turn 0.5s 0.5s linear both; 
+
+            & .shadow {
+                @include down-shadow;
+                animation: hide 0.5s 0.2s linear both;
+            }
+        }
+
+        & .up { 
+          & .shadow {
+                @include up-shadow;
+                animation: hide 0.5s 0.3s linear both; 
+            }
+        } 
+    }
+
+    .flip-clock-before {
+        z-index: 3 !important;
+
+        & .up {
+            z-index: 2;
+            animation: turn2 0.5s linear both; 
+
+            & .shadow {
+                @include up-shadow;
+                animation: show 0.5s linear both; 
+            }
+        }
+        & .down {
+            & .shadow {
+                @include down-shadow;
+                animation: show 0.5s linear both; 
+            }
+        }
+
+    }
+
+    @keyframes asd {
+        0% {
+          z-index: 2; }
+      
+        20% {
+          z-index: 4; }
+      
+        100% {
+          z-index: 4; } 
+    }
+
+    @keyframes turn {
+        0% {
+          transform: rotateX(90deg); 
+        }
+      
+        100% {
+          transform: rotateX(0deg); 
+        } 
+    }
+
+    @keyframes turn2 {
+        0% {
+          transform: rotateX(0deg); 
+        }
+      
+        100% {
+          transform: rotateX(-90deg); 
+        } 
+    }
+
+    @keyframes show {
+        0% {
+          opacity: 0; 
+        }
+      
+        100% {
+          opacity: 1; 
+        }
+    }
+
+    @keyframes hide {
+        0% {
+          opacity: 1; 
+        }
+      
+        100% {
+          opacity: 0; 
+        } 
+    }
+
 }
