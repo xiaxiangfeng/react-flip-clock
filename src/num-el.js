@@ -1,17 +1,11 @@
 import React from 'react'
 
-export default ({ num = 1 }) => {
+export default ({ type, num = 1 }) => {
   const li = []
 
   for (var i = 0; i < num; ++i) {
-    let style = ''
-
-    if (i === 0) style = 'flip-clock-before'
-
-    if (i === 1) style = 'flip-clock-active'
-
     li.push(
-      <li key={i} className={style}>
+      <li key={i}>
         <a href="#" className="">
           <div className="up">
             <div className="shadow"></div>
@@ -27,7 +21,7 @@ export default ({ num = 1 }) => {
   }
 
   return (
-      <ul>
+      <ul className={type}>
         {li}
       </ul>
   )
