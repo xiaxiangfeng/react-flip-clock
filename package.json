@@ -9,7 +9,8 @@
     "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "test": "npm run unit",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "prepublish": "webpack --config build/webpack.library.conf.js"
   },
   "dependencies": {
     "react": "^16.2.0",
@@ -63,7 +64,8 @@
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",
-    "webpack-merge": "^4.1.0"
+    "webpack-merge": "^4.1.0",
+    "webpack-node-externals": "^1.6.0"
   },
   "engines": {
     "node": ">= 6.0.0",
