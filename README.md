@@ -1,6 +1,6 @@
 # react-flip-clock
 
-> a react pack for flip clock
+> react 翻页时钟计时器插件
 
 ## Build Setup
 
