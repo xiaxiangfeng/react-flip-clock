@@ -2,15 +2,25 @@
   "name": "react-flip-clock",
   "url": "https://github.com/xiaxiangfeng/react-flip-clock",
   "email": "876029169@qq.com",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "react 翻页时钟计时器插件",
   "author": "xiaxiangfeng",
   "private": false,
-  "main": "lib/react-flip-clock.js",
+  "main": "lib/index.js",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/xiaxiangfeng/react-flip-clock"
   },
+  "keywords": [
+    "react",
+    "react-component",
+    "component",
+    "components",
+    "flip-clock",
+    "flip",
+    "clock"
+  ],
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
