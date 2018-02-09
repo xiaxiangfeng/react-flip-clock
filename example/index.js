@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import Clock from '../src/react-flip-clock.js'
+import Clock from 'react-flip-clock'
 
 const Index = () => {
   return (
