@@ -1,6 +1,7 @@
 # react 翻页时钟计时器
 
-> 基于react开发的一个翻页动画效果非常漂亮的计时器
+> 基于react开发的一个翻页动画效果非常漂亮的计时器。
+预览地址：http://xiaxiangfeng.github.io/flip-clock/index.html
 
 
 ## 从NPM下载包
@@ -28,6 +29,24 @@ render(
   <Index />,
   document.getElementById('app')
 )
+```
+
+### 自定义样式
+
+#### 编写样式覆盖即可
+
+``` css
+/*宽高*/
+.flip-clock-wrapper ul {
+  width: 60px;
+  height: 90px;
+}
+
+/*背景颜色、字体大小*/
+.flip-clock-wrapper .inn {
+  background-color: #502d2d;
+  font-size: 70px;
+}
 ```
 
 ## Build Setup
