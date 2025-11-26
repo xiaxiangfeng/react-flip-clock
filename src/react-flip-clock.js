@@ -8,15 +8,14 @@ export default class FlipClock extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      time: new Date()
+      diff: 0
     }
   }
 
   componentDidMount() {
+    this.tick()
     this.timer = setInterval(() => {
-      this.setState({
-        time: new Date()
-      })
+      this.tick()
     }, 1000)
   }
 
@@ -24,11 +23,45 @@ export default class FlipClock extends React.Component {
     clearInterval(this.timer)
   }
 
+  tick() {
+    const { mode, value } = this.props
+    const now = new Date().getTime()
+    let diff = 0
+
+    if (mode === 'countdown') {
+      const target = value instanceof Date ? value.getTime() : value
+      diff = Math.max(0, target - now)
+    } else if (mode === 'timer') {
+      const start = value instanceof Date ? value.getTime() : value
+      diff = Math.max(0, now - start)
+    } else {
+      // Clock mode
+      diff = new Date().getTime()
+    }
+
+    this.setState({ diff })
+  }
+
   render() {
-    const { time } = this.state
-    const hours = time.getHours()
-    const minutes = time.getMinutes()
-    const seconds = time.getSeconds()
+    const { mode } = this.props
+    const { diff } = this.state
+
+    let hours = 0
+    let minutes = 0
+    let seconds = 0
+
+    if (mode === 'clock') {
+      const date = new Date(diff)
+      hours = date.getHours()
+      minutes = date.getMinutes()
+      seconds = date.getSeconds()
+    } else {
+      // Duration logic for countdown/timer
+      const totalSeconds = Math.floor(diff / 1000)
+      hours = Math.floor(totalSeconds / 3600)
+      minutes = Math.floor((totalSeconds % 3600) / 60)
+      seconds = totalSeconds % 60
+    }
 
     return (
       <div className="flip-clock-wrapper">
@@ -38,4 +71,9 @@ export default class FlipClock extends React.Component {
       </div>
     )
   }
+}
+
+FlipClock.defaultProps = {
+  mode: 'clock', // 'clock', 'countdown', 'timer'
+  value: new Date()
 }
