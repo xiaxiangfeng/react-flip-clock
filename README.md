@@ -3,6 +3,7 @@
 > 基于react开发的一个翻页动画效果非常漂亮的计时器。
 预览地址：http://xiaxiangfeng.github.io/flip-clock/index.html
 
+![alt text](example.png)
 
 ## 从NPM下载包
 
