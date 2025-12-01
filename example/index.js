@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
-// import Clock from 'react-flip-clock'
-import Clock from '../lib/index.js'
+import Clock from 'react-flip-clock'
+// import Clock from '../lib/index.js'
 
 const Index = () => {
   // Countdown target: 1 hour from now
